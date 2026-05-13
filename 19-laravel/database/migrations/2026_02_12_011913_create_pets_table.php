@@ -11,21 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pets', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('image')->default('no-image.png');
-            $table->string('kind');
-            $table->double('weight');
-            $table->integer('age');
-            $table->string('breed');
-            $table->string('location');
-            $table->text('description');
-            $table->boolean('active')->default(1);
-            $table->boolean('adopted')->default(0);
+        if (!Schema::hasTable('pets')) {
+            Schema::create('pets', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('image')->default('no-image.png');
+                $table->string('kind');
+                $table->double('weight');
+                $table->integer('age');
+                $table->string('breed');
+                $table->string('location');
+                $table->text('description');
+                $table->boolean('active')->default(1);
+                $table->boolean('adopted')->default(0);
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**
